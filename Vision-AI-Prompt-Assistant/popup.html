@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    :root { --bg: #F2F2F7; --card-bg: #FFFFFF; --text-main: #000000; --text-sec: #8E8E93; --accent: #0A84FF; --border: rgba(0,0,0,0.05); }
+    @media (prefers-color-scheme: dark) { :root { --bg: #1C1C1E; --card-bg: #2C2C2E; --text-main: #FFFFFF; --text-sec: #8E8E93; --accent: #0A84FF; --border: rgba(255,255,255,0.05); } }
+    body { width: 280px; margin: 0; padding: 16px; background-color: var(--bg); color: var(--text-main); font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif; display: flex; flex-direction: column; gap: 12px; user-select: none; }
+    .apple-segment { display: flex; background: rgba(118, 118, 128, 0.24); border-radius: 8px; padding: 2px; }
+    .apple-segment input[type="radio"] { display: none; }
+    .apple-segment label { flex: 1; text-align: center; padding: 6px 0; border-radius: 6.5px; font-size: 12px; font-weight: 500; cursor: pointer; color: var(--text-main); transition: 0.2s cubic-bezier(0.25, 1, 0.5, 1); }
+    .apple-segment input[type="radio"]:checked + label { background: var(--card-bg); box-shadow: 0 3px 8px rgba(0,0,0,0.12), 0 1px 1px rgba(0,0,0,0.04); color: var(--accent); font-weight: 600; }
+    .quota-card { background: var(--card-bg); border-radius: 12px; padding: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border: 0.5px solid var(--border); display: flex; flex-direction: column; gap: 8px; }
+    .quota-header { display: flex; justify-content: space-between; align-items: center; }
+    .quota-title { font-size: 12px; font-weight: 600; color: var(--text-sec); text-transform: uppercase; letter-spacing: 0.5px; }
+    .btn-fetch-quota { background: rgba(10, 132, 255, 0.1); color: var(--accent); border: none; padding: 4px 10px; border-radius: 10px; font-size: 11px; font-weight: 600; cursor: pointer; transition: 0.2s; }
+    .btn-fetch-quota:hover { background: rgba(10, 132, 255, 0.2); }
+    .btn-fetch-quota:active { transform: scale(0.95); }
+    .quota-content { font-family: "SF Mono", monospace; font-size: 11px; color: var(--text-main); background: var(--bg); padding: 8px; border-radius: 8px; max-height: 140px; overflow-y: auto; white-space: pre-wrap; word-break: break-all; border: 0.5px solid var(--border); line-height: 1.5; }
+    .btn-options { background: transparent; color: var(--text-sec); border: none; padding: 8px; border-radius: 8px; font-size: 13px; font-weight: 500; cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 6px; }
+    .btn-options:hover { background: rgba(118, 118, 128, 0.12); color: var(--text-main); }
+    .btn-options svg { fill: currentColor; width: 14px; height: 14px; }
+  </style>
+</head>
+<body>
+  <div class="apple-segment">
+    <input type="radio" id="apiOff" name="apiMode" value="official"><label for="apiOff">Gemini</label>
+    <input type="radio" id="apiCus" name="apiMode" value="custom"><label for="apiCus">兼容接口</label>
+    <input type="radio" id="apiArk" name="apiMode" value="ark"><label for="apiArk">火山方舟</label>
+  </div>
+
+  <div class="quota-card">
+    <div class="quota-header">
+      <span class="quota-title">用量查询</span>
+      <button class="btn-fetch-quota" id="fetchQuotaBtn">查询</button>
+    </div>
+    <div class="quota-content" id="quotaContent">这里只支持第三方 Gemini 兼容代理接口的用量查询。Gemini 官方和火山方舟（包括 Coding Plan 会员）请在各自控制台查看用量。</div>
+  </div>
+
+  <button class="btn-options" id="optionsBtn">
+    <svg viewBox="0 0 24 24"><path d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.64-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.22.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5S10.07 8.5 12 8.5s3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"/></svg>
+    设置
+  </button>
+
+  <script src="popup.js"></script>
+</body>
+</html>
